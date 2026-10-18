@@ -1,0 +1,7 @@
+{
+  "platformio-ide.pythonPath": "${workspaceFolder}/.venv/bin/python",
+  "platformio-ide.useBuiltinPIOCore": false,
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  }
+}

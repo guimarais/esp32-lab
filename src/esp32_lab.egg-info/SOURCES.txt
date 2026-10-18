@@ -1,0 +1,8 @@
+LICENSE
+README.md
+pyproject.toml
+src/esp32_lab.egg-info/PKG-INFO
+src/esp32_lab.egg-info/SOURCES.txt
+src/esp32_lab.egg-info/dependency_links.txt
+src/esp32_lab.egg-info/requires.txt
+src/esp32_lab.egg-info/top_level.txt

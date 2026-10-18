@@ -1,0 +1,26 @@
+# Python / uv
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+uv.lock
+
+# PlatformIO
+.pio/
+.platformio/
+build/
+dist/
+
+# IDE
+.vscode/.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+*.o
+*.a
+*.elf
+*.hex
+*.bin
