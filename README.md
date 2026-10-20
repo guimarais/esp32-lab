@@ -27,8 +27,13 @@ and use `pio` from the terminal.
 ## New project
 
 ```bash
-uv run pio project init -d projects/<name> -b esp32dev -O framework=arduino
+./tools/new_project.sh <name>
+# Optional description:
+./tools/new_project.sh <name> --description "Short project description"
 ```
+
+The script creates `platformio.ini`, `src/main.cpp`, and the `include/`, `lib/`,
+and `test/` directories. It stops if `projects/<name>` already exists.
 
 ## Upload
 
