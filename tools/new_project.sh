@@ -81,7 +81,7 @@ cleanup() {
 }
 trap cleanup ERR
 
-mkdir -p "$project_dir/src" "$project_dir/include" "$project_dir/lib" "$project_dir/test"
+mkdir -p "$project_dir/src" "$project_dir/include" "$project_dir/lib" "$project_dir/test" "$project_dir/docs"
 
 cat > "$project_dir/platformio.ini" <<EOF
 [platformio]
