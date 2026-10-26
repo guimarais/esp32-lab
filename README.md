@@ -1,43 +1,64 @@
-# esp32-lab
+# Electronics Lab
 
-Monorepo of ESP32 experiments. Each firmware project is a standalone PlatformIO project.
+A collection of embedded, Raspberry Pi, and electronics design projects. Each project keeps its source, project-specific documentation, and related hardware design together.
 
-## Layout
+## Repository layout
 
+```text
+projects/
+  embedded/<name>/       Firmware and microcontroller projects (currently PlatformIO/ESP32)
+  raspberry-pi/<name>/   Raspberry Pi software, deployment files, and project notes
+  circuits/<name>/       Standalone KiCad designs
+docs/
+  guides/                Shared how-tos and workflows
+  reference/             Board, component, and protocol references
+  images/                Images used by shared documentation
+shared/
+  lib/                   Firmware libraries shared by multiple projects
+  hardware/              Reusable KiCad libraries or hardware modules
+tools/                   Project scaffolds and repository helpers
 ```
-projects/<name>/   PlatformIO project (platformio.ini, src/, include/, lib/, test/)
-shared/lib/        Libraries shared across projects (via lib_extra_dirs)
-tools/             Python helper scripts (managed with uv)
-docs/              Notes, wiring diagrams, datasheets
-```
 
-## Usage
+Projects that combine firmware and a PCB keep their KiCad files in a `hardware/` directory inside that project. Standalone board designs belong in `projects/circuits/`. Keep editable KiCad source files and project-specific libraries in version control; generated fabrication files belong in a documented release or manufacturing directory when they are intentional deliverables.
+
+## Embedded projects
+
+Install the development dependencies with:
 
 ```bash
-uv sync                                  # install Python tooling (incl. platformio)
-uv run pio run -d projects/blink         # build
-uv run pio run -d projects/blink -t upload
-uv run pio device monitor -d projects/blink
+uv sync
 ```
 
-In VS Code, install the PlatformIO IDE extension and open a project folder
-(`File > Add Folder to Workspace` for each `projects/<name>`), or open the repo root
-and use `pio` from the terminal.
-
-## New project
+Build a project by its path:
 
 ```bash
-./tools/new_project.sh <name>
-# Optional description:
-./tools/new_project.sh <name> --description "Short project description"
+uv run pio run -d projects/embedded/blink
 ```
 
-The script creates `platformio.ini`, `src/main.cpp`, and the `include/`, `lib/`,
-and `test/` directories. It stops if `projects/<name>` already exists.
-
-## Upload
+To upload firmware, connect the board to your computer over USB and run PlatformIO's `upload` target. For example, this builds and uploads the OLED project:
 
 ```bash
-uv run pio run -d projects/<name> -t upload
+uv run pio run -d projects/embedded/oled -t upload
 ```
 
+Replace `projects/embedded/oled` with the directory of the project you want to flash. If PlatformIO cannot identify the board's serial port automatically, specify it with `--upload-port`, for example `--upload-port /dev/ttyUSB0` on Linux. After uploading, open the serial monitor with:
+
+```bash
+uv run pio device monitor -d projects/embedded/oled
+```
+
+In VS Code, install the PlatformIO IDE extension and open a project folder (`File > Add Folder to Workspace`), or open the repository root and use `pio` from the terminal.
+
+## Create a project
+
+```bash
+./tools/new_project.sh embedded <name> [--description "Short description"]
+./tools/new_project.sh raspberry-pi <name> [--description "Short description"]
+./tools/new_project.sh circuit <name> [--description "Short description"]
+```
+
+The scaffold creates a starter README and directories appropriate to the project type. For KiCad designs, create the project with KiCad and save its `.kicad_pro`, `.kicad_sch`, and, when applicable, `.kicad_pcb` files in the generated circuit directory.
+
+## Documentation
+
+Start at [the documentation index](docs/index.md). Put project-specific instructions beside the project and shared references under `docs/`.

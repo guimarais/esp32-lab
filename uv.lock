@@ -185,7 +185,7 @@ wheels = [
 ]
 
 [[package]]
-name = "esp32-lab"
+name = "electronics-lab"
 version = "0.1.0"
 source = { virtual = "." }
 

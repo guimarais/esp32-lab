@@ -18,4 +18,11 @@ __pycache__/
 compile_commands.json
 *.bin
 *.elf
-projects/*/include/secrets.h
+projects/**/include/secrets.h
+
+# KiCad local state and generated backup files
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+
